@@ -1,0 +1,20 @@
+﻿const movingText = document.getElementById('movingText');
+let hue = 0;
+let position = 0;
+let direction = 1;
+
+function moveAndChangeColor() {
+    hue = (hue + 1) % 360; // Change hue for color
+    movingText.style.color = `hsl(${hue}, 100%, 50%)`; // Update text color
+
+    // Calculate position and direction for moving text
+    if (position > window.innerWidth - movingText.offsetWidth || position < 0) {
+        direction *= -1; // Change direction when hitting bounds
+    }
+    position += direction * 2; // Update position
+    movingText.style.left = `${position}px`; // Move text
+
+    requestAnimationFrame(moveAndChangeColor); // Repeat indefinitely
+}
+
+moveAndChangeColor(); // Start the animation
